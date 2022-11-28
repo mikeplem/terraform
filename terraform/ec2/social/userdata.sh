@@ -151,7 +151,7 @@ cp /var/www/mastodon/dist/nginx.conf /etc/nginx/conf.d/mastodon.conf
 sed -i 's/example\.com/social\.n1mtp\.com/' /etc/nginx/conf.d/mastodon.conf
 sed -i 's%/home/mastodon/live/public%/var/www/mastodon/public%' /etc/nginx/conf.d/mastodon.conf
 sed -i 's%/var/cache/nginx%/var/www/nginx%' /etc/nginx/conf.d/mastodon.conf
-sed -i -e 's%#[[:space:]]*ssl_certificate[[:space:]]*/etc/letsencrypt/live/example.com/fullchain.pem%ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem%' -e 's%#[[:space:]]*ssl_certificate_key[[:space:]]*/etc/letsencrypt/live/example.com/privkey.pem%ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key%' /etc/nginx/conf.d/mastodon.conf
+sed -i -e 's%#[[:space:]]*ssl_certificate[[:space:]]*/etc/letsencrypt/live/social.n1mtp.com/fullchain.pem%ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem%' -e 's%#[[:space:]]*ssl_certificate_key[[:space:]]*/etc/letsencrypt/live/social.n1mtp.com/privkey.pem%ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key%' /etc/nginx/conf.d/mastodon.conf
 
 if ! nginx -t; then
     echo "nginx config is invalid" | systemd-cat -t USERDATA -p info
@@ -162,3 +162,4 @@ fi
 echo "Cleaning up" | systemd-cat -t USERDATA -p info
 rm -f /tmp/mastadon.sql
 rm -f /tmp/run_mastadon_sql.sh
+rm -f /tmp/dev.list
