@@ -31,10 +31,10 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "social" {
 resource "aws_s3_bucket_public_access_block" "social" {
   bucket = aws_s3_bucket.social.id
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
 
 resource "aws_s3_bucket_policy" "social" {
@@ -46,54 +46,6 @@ resource "aws_s3_bucket_policy" "social" {
 
 data "aws_iam_policy_document" "social" {
   policy_id = "PutObjPolicy"
-
-  statement {
-    sid = "DenyIncorrectEncryptionHeader"
-    effect = "Deny"
-
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
-
-    actions = [
-      "s3:PutObject",
-    ]
-
-    resources = [
-      "${aws_s3_bucket.social.arn}/*",
-    ]
-
-    condition {
-      test     = "StringNotEquals"
-      variable = "s3:x-amz-server-side-encryption"
-      values   = ["AES256"]
-    }
-  }
-
-  statement {
-    sid = "DenyUnEncryptedObjectUploads"
-    effect = "Deny"
-
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
-
-    actions = [
-      "s3:PutObject",
-    ]
-
-    resources = [
-      "${aws_s3_bucket.social.arn}/*",
-    ]
-
-    condition {
-      test     = "Null"
-      variable = "s3:x-amz-server-side-encryption"
-      values   = ["true"]
-    }
-  }
 
   statement {
     sid = "EnforceEncryptedTransport"
@@ -118,6 +70,20 @@ data "aws_iam_policy_document" "social" {
       variable = "aws:SecureTransport"
       values   = ["false"]
     }
+  }
 
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:GetObject",
+    ]
+
+    resources = [
+      "${aws_s3_bucket.social.arn}/*",
+    ]
   }
 }

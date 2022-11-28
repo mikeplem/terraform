@@ -159,6 +159,20 @@ else
     systemctl restart nginx
 fi
 
+#echo "certbot" | systemd-cat -t USERDATA -p info
+# certbot --nginx --agree-tos --redirect --hsts --staple-ocsp --email <email> -d social.n1mtp.com
+
+#echo "configure mastadon" | systemd-cat -t USERDATA -p info
+#cd /var/www/mastadon
+#sudo -u mastodon RAILS_ENV=production bundle exec rake mastodon:setup
+
+#echo "Copy service files" | systemd-cat -t USERDATA -p info
+#cp /var/www/mastodon/dist/mastodon*.service /etc/systemd/system/
+#sed -i 's/home\/mastodon\/live/var\/www\/mastodon/g' /etc/systemd/system/mastodon-*.service
+#sed -i 's/home\/mastodon\/.rbenv\/shims/usr\/local\/bin/g' /etc/systemd/system/mastodon-*.service
+#systemctl daemon-reload
+#sudo systemctl enable --now mastodon-web mastodon-sidekiq mastodon-streaming
+
 echo "Cleaning up" | systemd-cat -t USERDATA -p info
 rm -f /tmp/mastadon.sql
 rm -f /tmp/run_mastadon_sql.sh
