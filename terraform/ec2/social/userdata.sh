@@ -173,6 +173,10 @@ fi
 #systemctl daemon-reload
 #sudo systemctl enable --now mastodon-web mastodon-sidekiq mastodon-streaming
 
+# DNS name
+# social.n1mtp.com -> public ip address
+# files.social.n1mtp.com -> plemmons-social.s3.amazonaws.com
+
 echo "Cleaning up" | systemd-cat -t USERDATA -p info
 rm -f /tmp/mastadon.sql
 rm -f /tmp/run_mastadon_sql.sh
