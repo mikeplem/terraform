@@ -161,6 +161,7 @@ fi
 
 #echo "certbot" | systemd-cat -t USERDATA -p info
 # certbot --nginx --agree-tos --redirect --hsts --staple-ocsp --email <email> -d social.n1mtp.com
+# certbot --nginx --agree-tos --redirect --hsts --staple-ocsp --email <email> -d files.social.n1mtp.com
 
 #echo "configure mastadon" | systemd-cat -t USERDATA -p info
 #cd /var/www/mastadon
