@@ -26,6 +26,19 @@ data "aws_iam_policy_document" "social" {
 
   statement {
     actions = [
+      "s3:ListBucket",
+      "s3:Get*",
+      "s3:Put*",
+    ]
+
+    resources = [
+      "arn:aws:s3:::plemmons-social-backup",
+      "arn:aws:s3:::plemmons-social-backup/*",
+    ]
+  }
+
+  statement {
+    actions = [
       "ec2:Describe*",
       "ec2:Get*",
     ]
