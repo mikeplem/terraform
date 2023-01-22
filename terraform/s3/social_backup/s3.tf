@@ -49,6 +49,37 @@ resource "aws_s3_bucket_versioning" "social_backup" {
   }
 }
 
+resource "aws_s3_bucket_lifecycle_configuration" "social_backup" {
+  bucket = aws_s3_bucket.social_backup.id
+
+  rule {
+    id = "DeleteOlderThan32Days"
+    status = "Enabled"
+
+    expiration {
+      days = 32
+    }
+
+    noncurrent_version_expiration {
+      noncurrent_days = 32
+    }
+  }
+
+  rule {
+    id     = "DeleteExpired"
+    status = "Enabled"
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 32
+    }
+
+    expiration {
+      days                         = 0
+      expired_object_delete_marker = true
+    }
+  }
+}
+
 # =======
 
 data "aws_iam_policy_document" "social_backup" {
