@@ -39,8 +39,8 @@ systemctl restart amazon-ssm-agent
 echo "getting env vars" | systemd-cat -t USERDATA -p info
 export AWS_TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
 export EC2ID=$(curl -s -H "X-aws-ec2-metadata-token: $AWS_TOKEN" http://169.254.169.254/latest/meta-data/instance-id)
-export DBVOL=$(aws ec2 describe-volumes --filter "Name=tag:disk_role,Values=db" --query 'Volumes[].VolumeId' --region us-east-1 --output text)
-export MASTVOL=$(aws ec2 describe-volumes --filter "Name=tag:disk_role,Values=mastadon" --query 'Volumes[].VolumeId' --region us-east-1 --output text)
+export DBVOL=$(aws ec2 describe-volumes --filter "Name=attachment.instance-id,Values=${EC2ID}" "Name=tag:disk_role,Values=db" --query 'Volumes[].VolumeId' --region us-east-1 --output text)
+export MASTVOL=$(aws ec2 describe-volumes --filter "Name=attachment.instance-id,Values=${EC2ID}" "Name=tag:disk_role,Values=mastadon" --query 'Volumes[].VolumeId' --region us-east-1 --output text)
 
 echo "getting nvme device list" | systemd-cat -t USERDATA -p info
 /usr/sbin/nvme list -o json 2> /dev/null | jq -r '.Devices[].DevicePath' > /tmp/dev.list
