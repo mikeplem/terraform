@@ -57,7 +57,7 @@ resource "aws_db_instance" "rds" {
   username             = "root"
   storage_type         = "gp3"
   password             = random_password.password.result
-  skip_final_snapshot  = false
+  skip_final_snapshot  = true
   publicly_accessible  = false
   vpc_security_group_ids = [aws_security_group.rds.id]
   performance_insights_enabled = false
