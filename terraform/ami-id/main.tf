@@ -1,35 +1,43 @@
-data "aws_ami" "linux" {
-  most_recent = true
-  
-  filter {
-    name   = "name"
-    values = ["*debian*"]
-  }
+data "aws_ami" "al2_linux_x86" {
+ most_recent = true
 
-  filter {
-   name   = "virtualization-type"
-    values = ["hvm"]  
-  }
+ filter {
+   name   = "owner-alias"
+   values = ["amazon"]
+ }
 
-  owners = ["136693071363"]
+ filter {
+   name   = "name"
+   values = ["amzn2-ami-hvm*"]
+ }
 }
 
-data "aws_ssm_parameter" "linux_amd64" {
-  name = "/aws/service/debian/release/11/latest/amd64"
+data "aws_ami" "al2_linux_arm" {
+ most_recent = true
+
+ filter {
+   name   = "owner-alias"
+   values = ["amazon"]
+ }
+
+ filter {
+   name   = "name"
+   values = ["amzn2-ami-hvm*arm*"]
+ }
 }
 
 data "aws_ssm_parameter" "linux_arm64" {
   name = "/aws/service/debian/release/11/latest/arm64"
 }
 
-output "ami_id" {
-    value = data.aws_ami.linux.id
+output "al2_x86_ami_id" {
+  value = data.aws_ami.al2_linux_x86.id
 }
 
-output "ssm_amd64" {
-    value = nonsensitive(data.aws_ssm_parameter.linux_amd64.value)
+output "al2_arm_ami_id" {
+  value = data.aws_ami.al2_linux_arm.id
 }
 
-output "ssm_arm64" {
-    value = nonsensitive(data.aws_ssm_parameter.linux_arm64.value)
+output "debian_arm64" {
+  value = nonsensitive(data.aws_ssm_parameter.linux_arm64.value)
 }
