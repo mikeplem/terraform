@@ -4,6 +4,12 @@ I am testing the process to access an RDS database without needing a VPN or some
 
 I have been able to successfully get the bastion hop to work. I am using a Bash shell helper function to make the connection to the EC2 bastion and RDS database.
 
+## Why this matters
+
+It is not necessary to connect to a VPN or some other service to be able to reach a RDS database on a private subnet. The EC2 instance as zero inbound ports so that server has a very small surface area when it comes to network exposure. The RDS database only needs subnet to allow private subnets to access it.
+
+## Connection Example
+
 This is how the helper shell functions works.
 
 ```
@@ -28,9 +34,7 @@ Type "help" for help.
 postgres=> 
 ```
 
----
-
-RDS Bastion Shell Helper
+## RDS Bastion Shell Helper
 
 This function takes 4 arguments
 
