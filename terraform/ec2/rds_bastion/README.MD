@@ -74,3 +74,17 @@ function rds_proxy_port {
 }
 
 ```
+
+## Testing Configuration
+
+### IAM Policy
+
+<https://github.com/mikeplem/terraform/tree/main/terraform/iam/ssm-session>
+
+### EC2 Bastion
+
+<https://github.com/mikeplem/terraform/tree/main/terraform/ec2/rds_bastion>
+
+### RDS Database
+
+<https://github.com/mikeplem/terraform/tree/main/terraform/rds>

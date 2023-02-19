@@ -3,6 +3,10 @@ data "aws_iam_policy_document" "ssm_access" {
     actions = [
       "ec2:Describe*",
       "ec2:Get*",
+      "rds:Describe*",
+      "tag:GetResources",
+      "tag:GetTagKeys",
+      "tag:GetTagValues",
     ]
 
     resources = [
@@ -17,7 +21,7 @@ data "aws_iam_policy_document" "ssm_access" {
 
     resources = [
       "arn:aws:ec2:*:*:instance/*",
-      "arn:aws:ssm:us-east-1::document/AWS-StartInteractiveCommand"
+      "arn:aws:ssm:us-east-1::document/AWS-StartPortForwardingSessionToRemoteHost"
     ]
 
     condition {
