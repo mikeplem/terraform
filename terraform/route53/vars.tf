@@ -42,6 +42,11 @@ variable "records" {
             type = "A"
         },
         {
+            name = "frigate"
+            record = "192.168.1.209"
+            type = "A"
+        },
+        {
             name = "git"
             record = "100.64.1.1"
             type = "A"
