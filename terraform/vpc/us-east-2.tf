@@ -229,7 +229,7 @@ module "tgw_us_east_2" {
   tgw_tags = merge(local.vpc_tags, {
     "Name" = "us-east-2 tgw",
     "Region" = "us-east-2",
-    "TgwPeer" = "tgw-0d97f24bfe6644ab4_us-east-1"
+    "TgwPeer" = "tgw-0d97f24bfe6644ab4_us-east-1/tgw-0d919ad9721f85acd_us-east-2"
   })
 
   providers = {

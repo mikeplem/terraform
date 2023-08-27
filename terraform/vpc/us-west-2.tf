@@ -189,6 +189,7 @@ module "us_west_2" {
 }
 
 module "tgw_us_west_2" {
+  depends_on = [module.us_west_2]
   source  = "terraform-aws-modules/transit-gateway/aws"
   version = "2.10.0"
 
@@ -228,7 +229,7 @@ module "tgw_us_west_2" {
   tgw_tags = merge(local.vpc_tags, {
     "Name" = "us-west-2 tgw",
     "Region" = "us-west-2",
-    "TgwPeer" = "tgw-0d97f24bfe6644ab4_us-east-1"
+    "TgwPeer" = "tgw-0d97f24bfe6644ab4_us-east-1/tgw-0f38615fd992feea8_us-west-2"
   })
 
   providers = {
