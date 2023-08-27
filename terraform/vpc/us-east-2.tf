@@ -198,8 +198,8 @@ module "tgw_us_east_2" {
   description = "us-east-2 transit gateway"
 
   enable_auto_accept_shared_attachments = true
-  enable_default_route_table_association = false
-  enable_default_route_table_propagation = false
+  enable_default_route_table_association = true
+  enable_default_route_table_propagation = true
   enable_vpn_ecmp_support = false
 
   vpc_attachments = {
@@ -228,7 +228,8 @@ module "tgw_us_east_2" {
   })
   tgw_tags = merge(local.vpc_tags, {
     "Name" = "us-east-2 tgw",
-    "Region" = "us-east-2"
+    "Region" = "us-east-2",
+    "TgwPeer" = "tgw-0d97f24bfe6644ab4_us-east-1"
   })
 
   providers = {
