@@ -45,3 +45,8 @@ resource "aws_iam_role_policy_attachment" "rds_bastion" {
   role       = aws_iam_role.rds_bastion.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
+
+resource "aws_iam_role_policy_attachment" "rds_bastion_logs" {
+  role       = aws_iam_role.rds_bastion.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
+}
