@@ -141,14 +141,14 @@ module "us_east_1" {
   private_route_table_tags = merge(local.vpc_tags, {
     "routeRole"      = "private",
     "Name"           = "private",
-    "Associate-with" = "Infrastructure",
-    "Propagate-to"   = "Infrastructure"
+    # "Associate-with" = "Infrastructure",
+    # "Propagate-to"   = "Infrastructure"
   })
   private_subnet_tags = merge(local.vpc_tags, {
     "subnetRole"    = "private",
     "Name"          = "private",
-    "Attach-to-tgw" = "",
-    "Route-to-tgw"  = ""
+    # "Attach-to-tgw" = "",
+    # "Route-to-tgw"  = ""
   })
   public_acl_tags = merge(local.vpc_tags, {
     "aclRole" = "public",
@@ -176,8 +176,8 @@ module "us_east_1" {
   })
   vpc_tags = merge(local.vpc_tags, {
     "vpcRole"        = "custom",
-    "Associate-with" = "Infrastructure",
-    "Propagate-to"   = "Infrastructure"
+    # "Associate-with" = "Infrastructure",
+    # "Propagate-to"   = "Infrastructure"
   })
   tags = local.vpc_tags
 
