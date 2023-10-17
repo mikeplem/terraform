@@ -1,5 +1,5 @@
 data "aws_ssm_parameter" "linux_arm64" {
-  name = "/aws/service/debian/release/12/latest/arm64"
+  name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-arm64"
 }
 
 data "aws_vpc" "us_east_2" {}
