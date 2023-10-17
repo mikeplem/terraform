@@ -39,7 +39,7 @@ resource "aws_security_group" "wireguard" {
 
 resource "aws_instance" "wireguard" {
   ami           = nonsensitive(data.aws_ssm_parameter.linux_arm64.value)
-  instance_type = "t4g.medium"
+  instance_type = "t4g.small"
   subnet_id     = data.aws_subnets.us_east_2.ids[0]
   hibernation   = false
 
