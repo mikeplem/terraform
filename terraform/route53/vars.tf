@@ -52,6 +52,16 @@ variable "records" {
             type = "A"
         },
         {
+            name = "hass"
+            record = "13ittluc6noru76u7dkg0rkdpgsm817l.ui.nabu.casa"
+            type = "CNAME"
+        },
+        {
+            name = "_acme-challenge.hass.n1mtp.com"
+            record = "_acme-challenge.13ittluc6noru76u7dkg0rkdpgsm817l.ui.nabu.casa"
+            type = "CNAME"
+        },
+        {
             name = "hasswg"
             record = "100.64.1.5"
             type = "A"
