@@ -101,6 +101,12 @@ variable "records" {
       ttl    = 86400
     },
     {
+      name   = "ntfy"
+      record = ["100.64.1.1"]
+      type   = "A"
+      ttl    = 86400
+    },
+    {
       name   = "owncloud"
       record = ["159.203.121.241"]
       type   = "A"
