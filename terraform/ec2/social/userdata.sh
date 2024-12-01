@@ -12,7 +12,7 @@ echo "running apt-get update" | systemd-cat -t USERDATA -p info
 apt-get update -y
 
 echo "running apt-get install nvme, jq, xfs" | systemd-cat -t USERDATA -p info
-apt-get install -y nvme-cli jq xfsprogs ca-certificates gnupg
+apt-get install -y nvme-cli jq xfsprogs ca-certificates gnupg mosquitto-clients
 
 echo "installing postgres apt key" | systemd-cat -t USERDATA -p info
 curl -s https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null
@@ -173,6 +173,22 @@ fi
 #sed -i 's/home\/mastodon\/.rbenv\/shims/usr\/local\/bin/g' /etc/systemd/system/mastodon-*.service
 #systemctl daemon-reload
 #sudo systemctl enable --now mastodon-web mastodon-sidekiq mastodon-streaming
+
+echo << EOF > /home/mastodon/checks.sh
+#!/usr/bin/env bash
+
+disk_util=$(df /dev/nvme0n1p1 | tail -1 | awk '{print $5}' | tr -d '%')
+
+echo "Disk util is ${disk_util}" | systemd-cat -t CHECKS -p info
+
+if [ "${disk_util}" -gt 50 ]; then
+    echo "Disk util is above 50%" | systemd-cat -t CHECKS -p alert
+    mosquitto_pub -h 100.64.1.5 -t social/disk -m "Mastadon Disk util is above 50%"
+fi
+EOF
+
+chown mastodon /home/mastodon/checks.sh
+chmod 755 /home/mastodon/checks.sh
 
 echo "Cleaning up" | systemd-cat -t USERDATA -p info
 rm -f /tmp/mastadon.sql
