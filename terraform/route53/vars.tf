@@ -41,6 +41,12 @@ variable "records" {
       ttl    = 86400
     },
     {
+      name   = "down-sense"
+      record = ["192.168.1.183"]
+      type   = "A"
+      ttl    = 86400
+    },
+    {
       name   = "files.social"
       record = ["34.233.156.231"]
       type   = "A"
@@ -145,6 +151,12 @@ variable "records" {
     {
       name   = "unifi"
       record = ["192.168.1.230"]
+      type   = "A"
+      ttl    = 86400
+    },
+    {
+      name   = "up-sense"
+      record = ["192.168.1.175"]
       type   = "A"
       ttl    = 86400
     },
