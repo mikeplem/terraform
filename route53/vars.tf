@@ -35,6 +35,12 @@ variable "records" {
       ttl    = 86400
     },
     {
+      name   = "mike.beer._report._dmarc"
+      record = ["v=DMARC1;"]
+      type   = "TXT"
+      ttl    = 86400
+    },
+    {
       name   = "cups"
       record = ["192.168.1.237"]
       type   = "A"
@@ -150,7 +156,7 @@ variable "records" {
     },
     {
       name   = "unifi"
-      record = ["192.168.1.230"]
+      record = ["192.168.1.218"]
       type   = "A"
       ttl    = 86400
     },
